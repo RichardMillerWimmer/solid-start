@@ -1,11 +1,19 @@
 import { Route, Routes } from '@solidjs/router';
-import type { Component } from 'solid-js';
+import { Component, createEffect, createSignal } from 'solid-js';
 import Nav from './components/Nav';
 import Home from './pages/Home';
 import Saved from './pages/Saved';
-import routes from './routes';
+
+const [username, setUsername] = createSignal('RichardMillerWimmer')
 
 const App: Component = () => {
+  createEffect(async () => {
+    const res = await fetch(`https://api.github.com/users/${username()}/repos?sort=created`)
+    const data = await res.json()
+    // console.log(data)
+  })
+
+
   return (
     <div>
       <Nav />
