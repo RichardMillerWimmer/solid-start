@@ -1,8 +1,12 @@
+import { NavLink } from "@solidjs/router";
 import { Component } from "solid-js";
 
 const Nav: Component = () => {
     return (
-        <div><h2>Nav Component</h2><nav></nav></div>
+        <nav>
+            <NavLink href="/" end activeClass="">Home</NavLink>
+            <NavLink href="/saved" activeClass="">Saved</NavLink>
+        </nav >
     )
 }
 
