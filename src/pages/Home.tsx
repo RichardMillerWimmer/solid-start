@@ -6,6 +6,7 @@ const Home: Component = () => {
         event.preventDefault()
         const usernameInput = document.querySelector('#usernameInput') as HTMLInputElement
         setUsername(usernameInput.value)
+        usernameInput.value = ''
     }
     return (
         <div>
