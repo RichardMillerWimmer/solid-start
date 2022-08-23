@@ -1,5 +1,6 @@
-import { Component } from "solid-js";
+import { Component, For } from "solid-js";
 import { repos, setUsername, username } from "../App";
+import Card, { Repo } from '../components/Card'
 
 const Home: Component = () => {
     const fetchWithUsername = (event: Event) => {
@@ -16,6 +17,9 @@ const Home: Component = () => {
                 <button>Get Repos</button>
             </form>
             <h2>GitHub Repositories for {username()}</h2>
+            <For each={repos()}>
+                {(repo: Repo) => < Card repo={repo} />}
+            </For>
         </div>
     )
 }
