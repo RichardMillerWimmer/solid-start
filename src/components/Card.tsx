@@ -16,11 +16,13 @@ interface RepoProps {
 
 const saveRepo = (repo: Repo) => {
     setSavedRepos([repo, ...savedRepos()])
+    localStorage.setItem('savedRepos', JSON.stringify(savedRepos()))
 }
 
 const unsaveRepo = (repoId: string) => {
     const repoArray = savedRepos()?.filter((repo: Repo) => repo.id !== repoId)
     setSavedRepos(repoArray)
+    localStorage.setItem('savedRepos', JSON.stringify(savedRepos()))
 }
 
 const isRepoSaved = (repoId: string) => {
