@@ -18,6 +18,18 @@ const saveRepo = (repo: Repo) => {
     setSavedRepos([repo, ...savedRepos()])
 }
 
+const unsaveRepo = (repoId: string) => {
+    const repoArray = savedRepos()?.filter((repo: Repo) => repo.id !== repoId)
+    setSavedRepos(repoArray)
+}
+
+const isRepoSaved = (repoId: string) => {
+    const isSaved = savedRepos()?.filter(repo => {
+        return repo.id === repoId
+    })
+    return isSaved?.length > 0
+}
+
 const Card: Component<RepoProps> = ({ repo }) => {
     return (
         <div>
@@ -25,7 +37,10 @@ const Card: Component<RepoProps> = ({ repo }) => {
             <div>
                 <a href={repo.html_url} target='_blank' rel="noreferrer"><strong>{repo.owner.login}</strong>/{repo.name}</a>
                 <p>{repo.description}</p>
-                <button onclick={() => saveRepo(repo)}>save</button>
+                {
+                    isRepoSaved(repo.id) ? <button onclick={() => unsaveRepo(repo.id)}>unsave</button> :
+                        <button onclick={() => saveRepo(repo)}>save</button>
+                }
             </div>
         </div>
     )
